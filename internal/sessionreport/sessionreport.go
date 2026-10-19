@@ -26,7 +26,7 @@ const (
 )
 
 // Styles lists every value session_report accepts.
-var Styles = []string{StyleClaude, "pi", "omp", "opencode", "command-code", "codex", "gemini", "muse", "grok", "antigravity", "hermes", StyleNone}
+var Styles = []string{StyleClaude, "pi", "omp", "opencode", "command-code", "codex", "gemini", "muse", "grok", "antigravity", "hermes", "devin", StyleNone}
 
 // HookCommand is the command a hook-config CLI runs: it reads the hook's JSON
 // input on stdin and reports the string field key. exec makes the CLI that

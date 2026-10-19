@@ -136,6 +136,14 @@ func runFake(name string) error {
 			return err
 		}
 		time.Sleep(time.Hour)
+	case "devin":
+		// One document on stdout and done, as `models list --format json` prints it.
+		raw, err := os.ReadFile(filepath.Join(os.Getenv("CATALOG_TESTDATA"), "devin_models.json"))
+		if err != nil {
+			return err
+		}
+		_, err = os.Stdout.Write(raw)
+		return err
 	case "claude":
 		parts := fixture("claude_initialize.json")
 		return serveLines(func(request fakeRequest) any {

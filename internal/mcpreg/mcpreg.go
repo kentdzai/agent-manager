@@ -51,6 +51,7 @@ var knownStyles = map[string]bool{
 	"command-code": true,
 	"muse":         true,
 	"antigravity":  true,
+	"devin":        true,
 	StyleNone:      true,
 }
 
@@ -126,6 +127,11 @@ func Apply(style, exe, hooksDir, command string, env map[string]string) (string,
 		return command, nil
 	case "antigravity":
 		if err := ensureAntigravityRegistered(exe, hooksDir); err != nil {
+			return "", err
+		}
+		return command, nil
+	case "devin":
+		if err := ensureDevinRegistered(exe, hooksDir); err != nil {
 			return "", err
 		}
 		return command, nil
@@ -289,6 +295,15 @@ func ensureGeminiRegistered(exe, hooksDir string) error {
 func ensureAntigravityRegistered(exe, hooksDir string) error {
 	cmd := exec.Command("agy", "mcp", "add", serverName, "--", exe, "mcp")
 	return ensureRegisteredOnce("antigravity", exe, hooksDir, cmd)
+}
+
+// Devin's stdio servers inherit the session environment, which already
+// carries the session id.
+func ensureDevinRegistered(exe, hooksDir string) error {
+	cmd := exec.Command("devin", "mcp", "add",
+		"--scope", "user",
+		serverName, "--", exe, "mcp")
+	return ensureRegisteredOnce("devin", exe, hooksDir, cmd)
 }
 
 type hermesMCPEntry struct {

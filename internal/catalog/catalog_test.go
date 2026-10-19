@@ -78,6 +78,12 @@ func TestReadersTakeEveryValueFromTheCLI(t *testing.T) {
 			{ID: "opencode/big-pickle", Label: "Big Pickle", Default: true},
 			{ID: "opencode/ling-3.0-flash-fin-free", Label: "Ling 3.0 Flash Fin Free"},
 		}}},
+		// devin flattens each family's variants into the model_uids --model takes.
+		{"devin", "devin", Catalog{Models: []Model{
+			{ID: "adaptive", Label: "Adaptive"},
+			{ID: "swe-2-high", Label: "SWE-2 High"},
+			{ID: "swe-2-max", Label: "SWE-2 Max"},
+		}}},
 	} {
 		t.Run(tc.fake, func(t *testing.T) {
 			got, err := fetchFake(t, tc.kind, tc.fake)

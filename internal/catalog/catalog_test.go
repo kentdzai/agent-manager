@@ -89,6 +89,12 @@ func TestReadersTakeEveryValueFromTheCLI(t *testing.T) {
 			{ID: "opencode/nemotron-3.5-lightning-free"},
 			{ID: "opencode/nemotron-3.5-super-vl-free"},
 		}}},
+		// devin flattens each family's variants into the model_uids --model takes.
+		{"devin", "devin", Catalog{Models: []Model{
+			{ID: "adaptive", Label: "Adaptive"},
+			{ID: "swe-2-high", Label: "SWE-2 High"},
+			{ID: "swe-2-max", Label: "SWE-2 Max"},
+		}}},
 	} {
 		t.Run(tc.fake, func(t *testing.T) {
 			got, err := fetchFake(t, tc.kind, tc.fake)

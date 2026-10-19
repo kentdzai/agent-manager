@@ -313,7 +313,7 @@ func TestDefaultResumeByIDFields(t *testing.T) {
 		t.Fatalf("pi resume_by_id_command = %q want \"pi --session {id}\"", got)
 	}
 	// Tools that mint their own id declare a store to capture it from.
-	for _, name := range []string{"codex", "opencode", "hermes", "command-code", "antigravity", "omp", "cursor", "kiro"} {
+	for _, name := range []string{"codex", "opencode", "hermes", "command-code", "antigravity", "omp", "cursor", "kiro", "devin"} {
 		tool := cfg.Tools[name]
 		if tool.SessionStore != name {
 			t.Fatalf("%s session_store = %q want %q", name, tool.SessionStore, name)
@@ -339,6 +339,7 @@ func TestDefaultResumeByIDFields(t *testing.T) {
 		{"cursor", "cursor-agent ls"},
 		{"kiro", "kiro-cli chat --resume-picker"},
 		{"copilot", "copilot --resume"},
+		{"devin", "devin --resume"},
 	} {
 		if got := cfg.Tools[tc.name].ResumePickerCommand; got != tc.want {
 			t.Fatalf("%s resume_picker_command = %q want %q", tc.name, got, tc.want)

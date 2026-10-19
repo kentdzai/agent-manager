@@ -66,21 +66,21 @@ type Tool struct {
 	ForkKeys string `toml:"fork_keys"`
 	// SessionStore names the built-in capturer that reads back the id a tool
 	// minted itself when it has no SessionIDFlag ("codex", "opencode",
-	// "gemini", "hermes", "command-code", "muse", "antigravity", "omp", "cursor"
-	// or "kiro").
+	// "gemini", "hermes", "command-code", "muse", "antigravity", "omp",
+	// "cursor", "kiro" or "devin").
 	SessionStore string `toml:"session_store"`
 	// MCP picks how the agent-manager MCP server is registered into this
 	// tool's sessions: "claude", "codex", "opencode", "grok", "gemini",
 	// "hermes", "command-code", "muse", "antigravity", "cursor", "kiro",
-	// "copilot" or "none".
+	// "copilot", "devin" or "none".
 	// Empty uses the tool's config key when it names a known style.
 	MCP string `toml:"mcp"`
 	// SessionReport names how the manager learns each conversation the
 	// running agent switches to, so revive resumes the one it was on: the
 	// agent reports it ("claude", "pi", "omp", "opencode", "command-code",
-	// "codex", "gemini", "copilot"), or the manager reads it from what the CLI keeps
-	// ("muse", "grok", "antigravity", "hermes"). "none" keeps the id
-	// captured at launch.
+	// "codex", "gemini", "copilot"), or the manager reads it from what the
+	// CLI keeps ("muse", "grok", "antigravity", "hermes", "devin"). "none"
+	// keeps the id captured at launch.
 	SessionReport  string `toml:"session_report"`
 	StatusSource   string `toml:"status_source"`
 	DefaultStatus  string `toml:"default_status"`

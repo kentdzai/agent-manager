@@ -51,9 +51,10 @@ func resolvePath(p string) string {
 // Capture returns the conversation id a tool wrote for a session launched
 // in cwd at or after launchedAt. sessionStore selects the on-disk format
 // ("codex", "opencode", "gemini", "hermes", "command-code", "muse",
-// "antigravity", "omp", "cursor" or "kiro"). claimed holds ids already bound to other sessions,
-// so two sessions started in one directory do not capture the same
-// conversation. terminal is the tty device of the session's pane: omp
+// "antigravity", "omp", "cursor", "kiro" or "devin"). claimed holds ids
+// already bound to other sessions, so two sessions started in one directory
+// do not capture the same conversation. terminal is the tty device of the
+// session's pane: omp
 // records which session each terminal runs, which tells sessions sharing a
 // directory apart where file times cannot; the other stores ignore it. It
 // returns ok=false when no confident match exists yet; the caller retries on
@@ -80,6 +81,8 @@ func Capture(sessionStore, cwd string, launchedAt time.Time, claimed map[string]
 		return captureCursor(cursorConfigDir(managerEnv), cwd, launchedAt, claimed)
 	case "kiro":
 		return captureKiro(cwd, launchedAt, claimed)
+	case "devin":
+		return captureDevin(devinStateDB(managerEnv), cwd, launchedAt, claimed)
 	default:
 		return "", false
 	}
@@ -117,6 +120,8 @@ func snapshotUnder(sessionStore, cwd, profile string, env Env) (map[string]int64
 		return snapshotCursor(cursorConfigDir(env), cwd)
 	case "kiro":
 		return snapshotKiro(cwd, env)
+	case "devin":
+		return snapshotDevin(devinStateDB(env), cwd)
 	default:
 		return nil, false
 	}
@@ -155,6 +160,8 @@ func Recapture(sessionStore, cwd string, snapshot map[string]int64, claimed map[
 		cands = recaptureCursor(cursorConfigDir(managerEnv), cwd, snapshot, claimed)
 	case "kiro":
 		cands = recaptureKiro(cwd, snapshot, claimed)
+	case "devin":
+		cands = recaptureDevin(devinStateDB(managerEnv), cwd, snapshot, claimed)
 	default:
 		return "", false
 	}

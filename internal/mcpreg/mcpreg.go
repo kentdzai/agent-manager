@@ -94,6 +94,7 @@ var knownStyles = map[string]bool{
 	"cursor":       true,
 	"kiro":         true,
 	"copilot":      true,
+	"devin":        true,
 	StyleNone:      true,
 }
 
@@ -191,6 +192,11 @@ func Apply(style, exe, hooksDir, command string, env map[string]string) (string,
 			return "", err
 		}
 		return command + " --additional-mcp-config " + tmux.ShellQuote("@"+path), nil
+	case "devin":
+		if err := ensureDevinRegistered(ctx, exe, hooksDir); err != nil {
+			return "", err
+		}
+		return command, nil
 	default:
 		return command, nil
 	}
@@ -557,6 +563,15 @@ func ensureKiroRegistered(ctx context.Context, exe, hooksDir string) error {
 		"--env", hooks.EnvSessionID + "=${" + hooks.EnvSessionID + "}",
 		"--force"}}
 	return ensureRegisteredOnce(ctx, "kiro", exe, hooksDir, add)
+}
+
+// Devin's stdio servers inherit the session environment, which already
+// carries the session id.
+func ensureDevinRegistered(ctx context.Context, exe, hooksDir string) error {
+	add := command{name: "devin", args: []string{"mcp", "add",
+		"--scope", "user",
+		serverName, "--", exe, "mcp"}}
+	return ensureRegisteredOnce(ctx, "devin", exe, hooksDir, add)
 }
 
 type hermesMCPEntry struct {

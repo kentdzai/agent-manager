@@ -704,4 +704,46 @@ rules = [
   # a failed turn leaves its "✗" row as the last thing above the composer
   { state = "errored", pattern = "(?m)^ ✗ [^\\n]*(?:\\n   \\S[^\\n]*)*(?:\\n[ \\t]*)*\\n \\S[^\\n]*\\n─{8,}[ \\t]*\\n❯[^\\n]*(?:\\n[^─\\n][^\\n]*)*\\n─{8,}[ \\t]*\\n[^\\n]*(?:\\n[ \\t]*)*\\z" },
 ]
+
+# Devin CLI takes its startup prompt after --, mints its own session id
+# (captured from sessions.db), and resumes by id or through its picker.
+[tools.devin]
+command = "devin"
+session_report = "devin"
+session_store = "devin"
+resume_by_id_command = "devin --resume {id}"
+resume_picker_command = "devin --resume"
+revive_command = "devin --continue"
+prompt_flag = "--"
+catalog = "devin"
+catalog_command = "devin models list --format json"
+model_args = "--model {model}"
+# A turn that draws no summary still resolves through the quiet-pane path:
+# like omp, a resting composer is a finished turn until the user
+# acknowledges it.
+default_status = "finished"
+# The composer, the numbered menus and the session picker all open on a ❭
+# row; the last one bounds the transcript. The composer's own sits at the
+# left edge for the arrow step.
+activity_cutoff = "(?m)^\\s*❭ "
+input_prefix = "^❭ "
+composer_placeholder = "Ask Devin to build features, fix bugs, or work on your code"
+input_placeholder = "Ask Devin to build features"
+user_echo = "^❭ "
+# the composer borders, and the banner rows the frame owns
+chrome_line = "^[ \\t]*─{8,}[ \\t]*$"
+rules = [
+  # approval, trust and picker dialogs close on a key-hint footer a typed
+  # prompt cannot echo
+  { state = "waiting", pattern = "(?m)↵ (?:confirm|to choose) · esc" },
+  # a menu keeps consecutive numbered options under the ❭ marker even when
+  # its footer scrolled out of frame
+  { state = "waiting", pattern = "(?ms)^\\s*❭ \\d+ [^\\n]*\\n +\\d+ " },
+  # a running turn's spinner row ends in the interrupt hint
+  { state = "working", pattern = "(?m)esc twice to interrupt" },
+  # esc esc ends a turn at the composer again: finished, not an error
+  { state = "finished", pattern = "(?m)^\\s*✗ Canceled\\b" },
+  # any other ✗ row is a failed step or turn
+  { state = "errored", pattern = "(?m)^\\s*✗ " },
+]
 `

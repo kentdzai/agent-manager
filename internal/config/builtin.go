@@ -569,13 +569,17 @@ input_placeholder = "Ask Devin to build features"
 user_echo = "^❭ "
 # the composer borders, and the banner rows the frame owns
 chrome_line = "^[ \\t]*─{8,}[ \\t]*$"
+# The tip block closes every turn once a response lands; nothing else
+# marks the end. With the marker configured, echoes and composer drafts
+# drop out of the match scope even before one has been drawn.
+turn_end = "^ *✱ Did you know"
+# tip bodies sit at three spaces, under the marker
+trailing_note = "^   \\S"
 rules = [
-  # approval, trust and picker dialogs close on a key-hint footer a typed
-  # prompt cannot echo
-  { state = "waiting", pattern = "(?m)↵ (?:confirm|to choose) · esc" },
-  # a menu keeps consecutive numbered options under the ❭ marker even when
-  # its footer scrolled out of frame
-  { state = "waiting", pattern = "(?ms)^\\s*❭ \\d+ [^\\n]*\\n +\\d+ " },
+  # modal dialogs (trust, approvals, pickers) pin a key-hint bar that
+  # pairs the confirm verb with esc; the / autocomplete's
+  # "↵ accept · esc close" stays outside on purpose: typing still works
+  { state = "waiting", pattern = "(?m)↵ (?:confirm|to choose)\\b[^\\n]*esc" },
   # a running turn's spinner row ends in the interrupt hint
   { state = "working", pattern = "(?m)esc twice to interrupt" },
   # esc esc ends a turn at the composer again: finished, not an error

@@ -1,0 +1,50 @@
+ ▲ Devin CLI works best when run in a project directory, not your home directory.
+Select a session to resume (all sessions)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+/ Type to search
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❭ agent-manager-rename-instructions  political-hamster · 1d ago
+  Đọc tài liệu handoff trong report
+  Opening Greeting / Session Start
+  Run sleep 10 for 10 seconds
+  reply with exactly: OK
+  Request for exact OK reply
+↑↓ select · ↵ confirm · esc cancel · alt+g this directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

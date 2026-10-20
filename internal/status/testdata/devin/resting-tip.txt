@@ -1,0 +1,27 @@
+ ▲ Devin CLI works best when run in a project directory, not your home directory.
+
+⠀⣴⣾⣶⡄⠀⠀⠀⠀
+⠀⠛⠿⠟⠻⣶⣾⣶⡄  Devin CLI
+⠀⣤⣶⣦⣴⠿⢿⠿⠃  v3000.11.92
+⠀⠻⢿⠿⠃⠀⠀⠀⠀
+
+ Pro · 0% remaining (resets in 14h 18m)
+
+❭ hi
+
+ The repo builds clean.
+
+ ✱ Did you know
+   Use /clear to start a fresh conversation
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❭ Ask Devin to build features, fix bugs, or work on your code
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+SWE-2 High                                                                                                                                                               Context: 13k / 262k tokens (4%)
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+ ▲ Devin CLI works best when run in a project directory, not your home directory.
+
+⠀⣴⣾⣶⡄⠀⠀⠀⠀
+⠀⠛⠿⠟⠻⣶⣾⣶⡄  Devin CLI
+⠀⣤⣶⣦⣴⠿⢿⠿⠃  v3000.11.92
+⠀⠻⢿⠿⠃⠀⠀⠀⠀
+
+ Pro · 0% remaining (resets in 14h 18m)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❭ /model
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+SWE-2 High                                                                                                                                              tab next · shift+tab prev · ↵ accept · esc close
+○ /model [adaptive|swe-2|claude-opus-5.5|...] Interactively choose a model, or specify one directly
+  /usage                                      Show session usage of credits / ACUs
+  /context                                    Show context window usage
+  /mode [mode]                                Show or switch mode
+  /bug [description]                          Report a bug to the Devin CLI developers
+  ↓ more
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

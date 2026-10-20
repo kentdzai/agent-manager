@@ -1,0 +1,50 @@
+ ▲ Devin CLI works best when run in a project directory, not your home directory.
+
+⠀⣴⣾⣶⡄⠀⠀⠀⠀
+⠀⠛⠿⠟⠻⣶⣾⣶⡄  Devin CLI
+⠀⣤⣶⣦⣴⠿⢿⠿⠃  v3000.11.92
+⠀⠻⢿⠿⠃⠀⠀⠀⠀
+
+ Pro · 0% remaining (resets in 14h 13m)
+
+❭ /model
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+/ Type to search
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❭ SWE-2               ✱ ← ◼◼◼    → High          Fast Mode Off
+  Adaptive
+  Claude Opus 5.5         ◼◼◼◼◼    Medium        Fast Mode Off
+  Gemini 4 Argon      ✱   ◼◼◼      Medium
+  Kimi K3                 ◼◼◼      High
+  GLM-5.2                 ◼◼◼      High          1M Context Off
+  GLM-5.3                 ◼◼◼      Max
+  Claude Sonnet 5.5       ◼◼◼◼◼    Medium
+  Gemini 3.8 Flash    ✱   ◼◼◼      Medium
+  Claude Haiku 5.5        ◼◼◼◼◼    Medium
+  ↓ more below
+
+   FREE  · no quota consumed
+
+
+
+  ✱ New  ✱ Promotion  ✱ Beta
+
+↑↓ select · tab fast mode · ←→ reasoning effort · ↵ confirm · alt+↵ this session only · esc cancel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

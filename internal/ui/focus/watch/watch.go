@@ -287,13 +287,20 @@ func (w *Watcher) Forward(command string) (available bool, err error) {
 // ForwardBlocks is Forward for a command tmux answers with several reply
 // blocks, which the client has to be told to expect.
 func (w *Watcher) ForwardBlocks(command string, blocks int) (available bool, err error) {
+	if !forwardsWrites {
+		return false, nil
+	}
 	w.mu.Lock()
 	control := w.control
 	w.mu.Unlock()
 	if control == nil {
 		return false, nil
 	}
-	return true, control.SendBlocks(command, blocks)
+	err = control.SendBlocks(command, blocks)
+	if fakeReply(command, err) {
+		err = nil
+	}
+	return true, err
 }
 
 // Query runs one tmux command over the control pipe and returns its

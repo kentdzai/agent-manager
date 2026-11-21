@@ -128,13 +128,11 @@ const hiddenWindowStatus = "#[default]"
 // window is sized to the preview whole, the panes keeping their shares.
 const pinsSplitPane = false
 
-// controlUnavailable keeps the manager off psmux's control client. Its
-// output thread slices each line at byte 200 for a debug log and panics
-// when that cuts a multibyte character, which an agent's box-drawn UI does
-// on nearly every capture; the client then goes silent while still
-// attached. Previews poll capture-pane instead.
+// controlUnavailable lets the watcher use psmux's control client: the relay
+// panic that took it silent on multibyte pane lines was fixed ahead of 3.4.0
+// (psmux #712), and psmuxMinimum already refuses anything older.
 func controlUnavailable() error {
-	return fmt.Errorf("%w: its client panics on wide pane lines", ErrControlUnavailable)
+	return nil
 }
 
 // sessionMissingExit reports has-session's answer for a session that is

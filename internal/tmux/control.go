@@ -492,6 +492,12 @@ func (c *Control) readLoop(stdout io.Reader) {
 			case c.events <- struct{}{}:
 			default:
 			}
+			c.greet()
+		case strings.HasPrefix(line, "%"):
+			// psmux greets a -C client with bare notifications and no reply
+			// block, where tmux leads with one; the first line of either
+			// shape is proof the attach took.
+			c.greet()
 		}
 		// Other notifications (%session-changed, %layout-change, %exit …)
 		// carry nothing the preview needs.
@@ -523,9 +529,8 @@ func blockEnd(line, tag string) bool {
 func (c *Control) resolve(text string, isError bool) {
 	c.mu.Lock()
 	if !c.greeted {
-		c.greeted = true
 		c.mu.Unlock()
-		close(c.ready)
+		c.greet()
 		return
 	}
 	var waiter chan reply
@@ -542,6 +547,19 @@ func (c *Control) resolve(text string, isError bool) {
 		return
 	}
 	waiter <- reply{text: text}
+}
+
+// greet marks the attach confirmed once, however the multiplexer says
+// hello: tmux's greeting block, or psmux's leading notifications.
+func (c *Control) greet() {
+	c.mu.Lock()
+	if c.greeted {
+		c.mu.Unlock()
+		return
+	}
+	c.greeted = true
+	c.mu.Unlock()
+	close(c.ready)
 }
 
 // fail ends the client: records the read error, wakes every waiter via
